@@ -1,6 +1,6 @@
 # LLM Case Tooling
 
-Building the [RealWorld](../realworld-docs/) app from spec using different agentic coding harnesses and LLM models, then comparing the results.
+Building the RealWorld app from spec using different agentic coding harnesses and LLM models, then comparing the results.
 
 ## Goal
 
