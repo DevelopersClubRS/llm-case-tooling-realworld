@@ -1,0 +1,10 @@
+
+Cilj projekta je izrada medium clone-a po realworld specifikaciji
+Tech stack: 
+- React + TypeScript + Vite + Express + SQL Postgres 
+- Architectual pattern will be Layered Architecture
+- Playwright for testing complex user flows/drag drop 
+- Jest for unit testing
+- Backend testing supertest and mocha
+- Docker for containerization
+- Strict Airbnb coding style/linting rules + ESLint

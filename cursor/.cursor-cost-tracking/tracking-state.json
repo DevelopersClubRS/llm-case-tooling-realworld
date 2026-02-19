@@ -1,0 +1,25 @@
+{
+  "firstTrackedAt": "2026-02-18T19:41:33.304Z",
+  "totalRequests": 59,
+  "totalTokens": 29170670,
+  "totalCost": 50.51,
+  "byModel": {
+    "claude-4.6-opus-high-thinking": {
+      "requests": 59,
+      "tokens": 29170670,
+      "cost": 50.51
+    }
+  },
+  "byKind": {
+    "USAGE_EVENT_KIND_USAGE_BASED": {
+      "requests": 57,
+      "tokens": 29170670,
+      "cost": 50.51
+    },
+    "USAGE_EVENT_KIND_ERRORED_NOT_CHARGED": {
+      "requests": 2,
+      "tokens": 0,
+      "cost": 0
+    }
+  }
+}

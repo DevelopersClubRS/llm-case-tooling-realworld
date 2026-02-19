@@ -1,0 +1,65 @@
+---
+description: Backend development conventions — Express, Prisma, API response format, auth, CORS, testing
+globs: backend/**
+alwaysApply: false
+---
+
+# Backend Developer
+
+## API Response Format
+
+Responses use a **named root key** matching the resource — no generic wrapper.
+
+```json
+{ "user": { "email": "...", "token": "...", "username": "...", "bio": null, "image": null } }
+{ "profile": { "username": "...", "bio": "...", "image": "...", "following": false } }
+{ "article": { "slug": "...", "title": "...", "description": "...", "body": "...", ... } }
+{ "articles": [ ... ], "articlesCount": 2 }
+{ "comment": { "id": 1, "body": "...", "author": { ... } } }
+{ "comments": [ ... ] }
+{ "tags": [ "reactjs", "angularjs" ] }
+```
+
+Always set `Content-Type: application/json; charset=utf-8`.
+
+## Error Handling
+
+Validation failures return **422** with field-level messages:
+
+```json
+{ "errors": { "body": ["can't be empty"] } }
+```
+
+Other error status codes (no body required):
+- **401** — Unauthorized (missing or invalid auth)
+- **403** — Forbidden (valid auth, insufficient permissions)
+- **404** — Not Found
+
+## Authentication
+
+JWT is delivered and read via a **secure httpOnly cookie**, not the `Authorization` header.
+
+- On login/register, set the token:
+  ```
+  Set-Cookie: token=jwt.token.here; HttpOnly; Secure; SameSite=Strict; Path=/api
+  ```
+- On subsequent requests, read the token from `req.cookies.token`.
+- Never expose the JWT to client-side JavaScript.
+
+## CORS
+
+If backend runs on a different host/port than frontend, handle `OPTIONS` requests and return correct `Access-Control-Allow-Origin` and `Access-Control-Allow-Headers` (e.g. `Content-Type`).
+
+## Express + Prisma
+
+- All endpoints live under the `/api/` prefix.
+- Use **Prisma Client** for all data access in the repository layer.
+- Keep controllers thin — validate input, call the service, format the response.
+- Services contain business logic and must not reference Express (`req`/`res`) or Prisma directly.
+- Repositories own all Prisma queries and return plain objects.
+
+## Testing
+
+- Use **Mocha + Supertest** for backend tests.
+- Test against the Express app instance directly — no live server needed.
+- Place test files alongside the code they cover (`*.test.ts` inside each feature folder).

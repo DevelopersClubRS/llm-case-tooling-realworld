@@ -1,0 +1,238 @@
+{
+  "lastUpdated": "2026-02-19T19:37:51.053Z",
+  "last24h": {
+    "totalRequests": 59,
+    "totalTokens": 29170670,
+    "totalCost": 50.51,
+    "totalCostDisplay": "$50.5100"
+  },
+  "sinceTrackingStarted": {
+    "firstTrackedAt": "2026-02-18T19:41:33.304Z",
+    "totalRequests": 59,
+    "totalTokens": 29170670,
+    "totalCost": 50.51,
+    "totalCostDisplay": "$50.5100"
+  },
+  "byModel": {
+    "claude-4.6-opus-high-thinking": {
+      "requests": 59,
+      "tokens": 29170670,
+      "cost": 50.51
+    }
+  },
+  "byKind": {
+    "USAGE_EVENT_KIND_USAGE_BASED": {
+      "requests": 57,
+      "tokens": 29170670,
+      "cost": 50.51
+    },
+    "USAGE_EVENT_KIND_ERRORED_NOT_CHARGED": {
+      "requests": 2,
+      "tokens": 0,
+      "cost": 0
+    }
+  },
+  "recentEvents": [
+    {
+      "timestamp": "1771529715079",
+      "date": "2/19/2026",
+      "time": "8:35:15 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 98234,
+      "cost": 0.08,
+      "costDisplay": "$0.08",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771529652355",
+      "date": "2/19/2026",
+      "time": "8:34:12 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 131066,
+      "cost": 0.24,
+      "costDisplay": "$0.24",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771527549262",
+      "date": "2/19/2026",
+      "time": "7:59:09 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 502266,
+      "cost": 0.43,
+      "costDisplay": "$0.43",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771527386916",
+      "date": "2/19/2026",
+      "time": "7:56:26 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 701187,
+      "cost": 1.11,
+      "costDisplay": "$1.11",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771527268871",
+      "date": "2/19/2026",
+      "time": "7:54:28 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 600018,
+      "cost": 0.96,
+      "costDisplay": "$0.96",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771527040378",
+      "date": "2/19/2026",
+      "time": "7:50:40 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 291229,
+      "cost": 0.99,
+      "costDisplay": "$0.99",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771525146507",
+      "date": "2/19/2026",
+      "time": "7:19:06 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 930594,
+      "cost": 1.22,
+      "costDisplay": "$1.22",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771522193634",
+      "date": "2/19/2026",
+      "time": "6:29:53 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 1122520,
+      "cost": 2.47,
+      "costDisplay": "$2.47",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771512424891",
+      "date": "2/19/2026",
+      "time": "3:47:04 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 548604,
+      "cost": 0.86,
+      "costDisplay": "$0.86",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771512392338",
+      "date": "2/19/2026",
+      "time": "3:46:32 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 100715,
+      "cost": 0.17,
+      "costDisplay": "$0.17",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771512181898",
+      "date": "2/19/2026",
+      "time": "3:43:01 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 2657705,
+      "cost": 1.77,
+      "costDisplay": "$1.77",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771512025286",
+      "date": "2/19/2026",
+      "time": "3:40:25 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 432255,
+      "cost": 0.85,
+      "costDisplay": "$0.85",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771512011159",
+      "date": "2/19/2026",
+      "time": "3:40:11 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 313147,
+      "cost": 0.76,
+      "costDisplay": "$0.76",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771512003820",
+      "date": "2/19/2026",
+      "time": "3:40:03 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 0,
+      "cost": 0,
+      "costDisplay": "$0.00",
+      "kind": "USAGE_EVENT_KIND_ERRORED_NOT_CHARGED"
+    },
+    {
+      "timestamp": "1771511888477",
+      "date": "2/19/2026",
+      "time": "3:38:08 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 263417,
+      "cost": 0.29,
+      "costDisplay": "$0.29",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771510645973",
+      "date": "2/19/2026",
+      "time": "3:17:25 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 196582,
+      "cost": 0.59,
+      "costDisplay": "$0.59",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771509875364",
+      "date": "2/19/2026",
+      "time": "3:04:35 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 574618,
+      "cost": 0.37,
+      "costDisplay": "$0.37",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771509778444",
+      "date": "2/19/2026",
+      "time": "3:02:58 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 273700,
+      "cost": 0.6,
+      "costDisplay": "$0.60",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771509591430",
+      "date": "2/19/2026",
+      "time": "2:59:51 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 1465846,
+      "cost": 1.03,
+      "costDisplay": "$1.03",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    },
+    {
+      "timestamp": "1771509395767",
+      "date": "2/19/2026",
+      "time": "2:56:35 PM",
+      "model": "claude-4.6-opus-high-thinking",
+      "tokens": 389921,
+      "cost": 0.25,
+      "costDisplay": "$0.25",
+      "kind": "USAGE_EVENT_KIND_USAGE_BASED"
+    }
+  ],
+  "activeSession": null
+}

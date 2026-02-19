@@ -1,0 +1,158 @@
+---
+description: Frontend development conventions — React, TypeScript, Vite, hooks-driven architecture, simple views
+globs: frontend/**
+alwaysApply: false
+---
+
+# Frontend Developer
+
+## Core Principle
+
+**Views are dumb, hooks are smart.** Components handle rendering only. All logic, state management, and side effects live in custom hooks.
+
+## Component Architecture
+
+```
+features/
+  articles/
+    ArticleList.tsx          — view (renders props, calls hook callbacks)
+    useArticleList.ts        — hook (fetches data, manages state, exposes actions)
+    ArticleList.test.tsx
+    ArticlePreview.tsx       — small presentational component
+    articles.types.ts
+```
+
+### Views
+
+- Functional components only — no class components.
+- A view receives data and callbacks from its hook, then renders JSX. Nothing else.
+- No `fetch`, no `useEffect`, no complex conditionals inside view components.
+- Keep views flat and readable — if a chunk of JSX is reused or complex, extract it into a small presentational component in the same feature folder.
+
+```tsx
+export const ArticleList = () => {
+  const { articles, isLoading, onFavorite } = useArticleList();
+
+  if (isLoading) return <LoadingSpinner />;
+
+  return (
+    <div className="article-list" data-testid="@home/articles/article-list">
+      {articles.map((a) => (
+        <ArticlePreview key={a.slug} article={a} onFavorite={onFavorite} />
+      ))}
+    </div>
+  );
+};
+```
+
+### Test IDs (`data-testid`)
+
+Every component's **main container** and any element important for testing or instrumentation must have a `data-testid` following this pattern:
+
+```
+@area/feature/component
+```
+
+| Segment | Meaning | Examples |
+|---------|---------|----------|
+| `area` | Top-level area of the app | `home`, `auth`, `editor`, `settings`, `profile` |
+| `feature` | Feature within that area | `articles`, `comments`, `tags`, `feed` |
+| `component` | Specific element | `article-list`, `favorite-btn`, `comment-form`, `submit-btn` |
+
+Examples:
+
+```
+@home/articles/article-list
+@home/tags/tag-list
+@auth/login/submit-btn
+@article/comments/comment-form
+@editor/form/publish-btn
+@profile/articles/favorite-btn
+```
+
+- Always add `data-testid` to a component's outermost wrapper element.
+- Add `data-testid` to interactive elements that tests or analytics need to target (buttons, forms, inputs).
+- Never use auto-generated or index-based test IDs.
+
+### Hooks
+
+- One custom hook per view: `useArticleList`, `useAuth`, `useEditor`, etc.
+- Hooks own the data fetching, error handling, loading states, and user actions.
+- Hooks return a plain object with data + callbacks — the view destructures it.
+- Shared logic (e.g., auth state, API client) lives in `core/` hooks.
+
+## Routing
+
+| Page | URL |
+|------|-----|
+| Home | `/` |
+| Sign In | `/login` |
+| Sign Up | `/register` |
+| Article | `/article/:slug` |
+| Editor (new) | `/editor` |
+| Editor (edit) | `/editor/:slug` |
+| Settings | `/settings` |
+| Profile | `/profile/:username` |
+| Favorites | `/profile/:username/favorites` |
+
+## Auth
+
+- JWT is stored in a **secure, httpOnly, sameSite cookie** — never in `localStorage` or JavaScript-accessible storage.
+- The browser sends the cookie automatically; the frontend does not manually attach auth headers.
+- Auth state (current user, login/logout) is managed in a shared `useAuth` hook / context in `core/`.
+- Login/register responses set the cookie via `Set-Cookie` from the backend.
+
+## Design System
+
+All visual decisions are centralized in `core/design-system/`. Components must never use hard-coded colors, font sizes, or spacing — always consume design tokens.
+
+```
+core/
+  design-system/
+    tokens.ts        — colors, spacing, typography, radii, shadows
+    typography.ts    — heading/body text styles, font families, weights
+    theme.ts         — assembled theme object (tokens + component defaults)
+    global.css       — CSS custom properties generated from tokens
+```
+
+### Tokens
+
+Define every primitive once:
+
+```ts
+export const colors = {
+  primary:    '#5CB85C',
+  secondary:  '#818a91',
+  danger:     '#B85C5C',
+  background: '#ffffff',
+  surface:    '#f3f3f3',
+  text:       '#373a3c',
+  textMuted:  '#818a91',
+  border:     '#e5e5e5',
+} as const;
+
+export const typography = {
+  fontFamily: "'Source Sans Pro', sans-serif",
+  headingFamily: "'Titillium Web', sans-serif",
+  sizes: { xs: '0.75rem', sm: '0.875rem', md: '1rem', lg: '1.25rem', xl: '1.5rem', xxl: '2.5rem' },
+  weights: { regular: 400, semibold: 600, bold: 700 },
+} as const;
+
+export const spacing = {
+  xs: '0.25rem', sm: '0.5rem', md: '1rem', lg: '1.5rem', xl: '2rem', xxl: '3rem',
+} as const;
+```
+
+### Rules
+
+- **No magic values.** Never write `color: '#5CB85C'` or `padding: 16px` directly in a component — import from tokens.
+- Components consume the theme via CSS custom properties or direct token imports.
+- Common UI states (hover, active, disabled, error, loading) must use token-based styles, not ad-hoc overrides.
+- The RealWorld Bootstrap 4 CDN theme handles the baseline. Design system tokens extend and override it for consistency.
+- Render article body as markdown on the client side.
+
+## Testing
+
+- **Jest + React Testing Library** for unit/component tests (`*.test.tsx`).
+- **Playwright** for E2E flows (`e2e/**/*.spec.ts`).
+- Test hooks independently from views where possible.

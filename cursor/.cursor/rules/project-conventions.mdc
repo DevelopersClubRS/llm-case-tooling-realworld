@@ -1,0 +1,98 @@
+---
+description: Core project conventions — Medium clone (RealWorld spec) built with React, TypeScript, Vite, Express, Postgres, and Docker
+alwaysApply: true
+---
+
+# Project Overview
+
+This project is a **Medium clone** built to the RealWorld specification. All spec documents are available locally in `docs/realworld/` — always consult those files as the single source of truth instead of any external website.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | React + TypeScript + Vite |
+| Backend | Express (Node.js + TypeScript) |
+| Database | PostgreSQL + Prisma ORM |
+| Containerization | Docker + Docker Compose |
+
+## Architecture
+
+Use **Layered Architecture** organized by **feature folders** — each feature is self-contained with its own layers, keeping related code concise and coherent.
+
+```
+src/
+  core/              — Shared infrastructure (middleware, error handling, config, DB client)
+  features/
+    auth/
+      auth.controller.ts
+      auth.service.ts
+      auth.repository.ts
+      auth.routes.ts
+      auth.types.ts
+      auth.test.ts
+    articles/
+      articles.controller.ts
+      articles.service.ts
+      articles.repository.ts
+      articles.routes.ts
+      articles.types.ts
+      articles.test.ts
+    profiles/
+      ...same pattern
+    comments/
+      ...same pattern
+```
+
+### Rules
+
+- Everything related to a feature lives inside its own folder.
+- Each feature still respects layered boundaries: **route → controller → service → repository**.
+- Shared utilities, middleware, and config go in `core/`.
+- Never import directly between feature folders — extract shared logic into `core/` instead.
+
+## Coding Style
+
+- **Strict Airbnb style** enforced via ESLint (`eslint-config-airbnb` / `eslint-config-airbnb-typescript`).
+- Always run `eslint --fix` before considering code complete.
+- Use named exports; avoid default exports except for React page components.
+- Keep files focused — one primary export per file.
+- Code must be **self-documenting** — use clear naming so the code speaks for itself.
+- **No noise comments.** Never write comments that just restate what the code does.
+- Comments are only acceptable when they explain something **outside the code's scope**: a complex business requirement, an infrastructure constraint, a regulatory reason, or a non-obvious trade-off.
+
+```typescript
+// BAD — noise that restates the code
+// call the login function
+await login(credentials);
+
+// GOOD — explains a business/infra concern the code alone cannot convey
+// OAuth tokens expire after 15 min per provider SLA; refresh preemptively
+await refreshTokenIfNeeded(session);
+```
+
+## Testing Strategy
+
+| Scope | Tool | Location |
+|-------|------|----------|
+| Frontend unit tests | Jest + React Testing Library | `*.test.tsx` / `*.test.ts` |
+| Backend unit tests | Mocha + Supertest | `*.test.ts` in backend |
+| E2E / complex user flows | Playwright | `e2e/**/*.spec.ts` |
+
+- Write tests alongside the code they cover.
+- E2E tests target complex flows (auth, drag-and-drop, multi-step forms).
+- Backend integration tests use Supertest against the Express app (no live server required).
+
+## Docker
+
+- Frontend and backend each have their own `Dockerfile`. The database runs as a standard PostgreSQL image — no custom Dockerfile needed.
+- Use `docker-compose.yml` for local development orchestration.
+- Never hard-code secrets — use environment variables.
+
+## General Guidelines
+
+- Use English for all code, comments, commit messages, and documentation.
+- Prefer small, focused commits with descriptive messages.
+- Handle errors explicitly — no empty catch blocks, no swallowed promises.
+- Backend API conventions are defined in the `backend-developer` rule.
+- Frontend component patterns are defined in the `frontend-developer` rule.
